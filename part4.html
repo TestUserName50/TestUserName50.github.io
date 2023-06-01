@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Part 4</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -24,75 +23,87 @@
       <button class="choice">Choice 6</button>
     </div>
     <div class="result-message"></div>
+    <div class="score-message"></div>
   </div>
-  
+
   <script>
     const images = ['image1.jpg', 'image2.jpg', 'image3.jpg', 'image4.jpg'];
-const correctAnswers = ['Andy Warhol', 'Yayoi Kusama', 'Henri Matisse', 'Wassily Kandinsky', 'Frida Kahlo', 'Marc Chagall'];
+    const correctAnswers = ['Andy Warhol', 'Yayoi Kusama', 'Henri Matisse', 'Wassily Kandinsky', 'Frida Kahlo', 'Marc Chagall'];
 
-let activeImageIndex = 0;
+    let activeImageIndex = 0;
+    let score = 0;
 
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
-function displayActiveImage() {
-  const images = document.querySelectorAll('.image');
-  images.forEach((image, index) => {
-    if (index === activeImageIndex) {
-      image.classList.add('active');
-    } else {
-      image.classList.remove('active');
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
     }
-  });
-}
 
-function displayChoices() {
-  const choices = document.querySelectorAll('.choice');
-  const shuffledAnswers = shuffle(correctAnswers.slice());
-
-  choices.forEach((choice, index) => {
-    choice.textContent = shuffledAnswers[index];
-  });
-}
-
-function showResultMessage(isCorrect) {
-  const resultMessage = document.querySelector('.result-message');
-  resultMessage.textContent = isCorrect ? 'Correct answer!' : 'Wrong answer! Try again.';
-  resultMessage.classList.add(isCorrect ? 'correct' : 'wrong');
-}
-
-function checkAnswer(event) {
-  const selectedChoice = event.target.textContent;
-  const currentCorrectAnswer = correctAnswers[activeImageIndex];
-
-  if (selectedChoice === currentCorrectAnswer) {
-    showResultMessage(true);
-    activeImageIndex++;
-
-    if (activeImageIndex >= images.length) {
-      window.location.href = 'part5.html';
-      return;
+    function displayActiveImage() {
+      const images = document.querySelectorAll('.image');
+      images.forEach((image, index) => {
+        if (index === activeImageIndex) {
+          image.classList.add('active');
+        } else {
+          image.classList.remove('active');
+        }
+      });
     }
+
+    function displayChoices() {
+      const choices = document.querySelectorAll('.choice');
+      const shuffledAnswers = shuffle(correctAnswers.slice());
+
+      choices.forEach((choice, index) => {
+        choice.textContent = shuffledAnswers[index];
+      });
+    }
+
+    function showResultMessage(isCorrect) {
+      const resultMessage = document.querySelector('.result-message');
+      const scoreMessage = document.querySelector('.score-message');
+
+      if (isCorrect) {
+        resultMessage.textContent = 'Correct answer!';
+        resultMessage.classList.add('correct');
+        score++;
+      } else {
+        resultMessage.textContent = 'Wrong answer! Try again.';
+        resultMessage.classList.add('wrong');
+      }
+
+      scoreMessage.textContent = `Score: ${12 + score}/${20}`;
+    }
+
+    function checkAnswer(event) {
+      const selectedChoice = event.target.textContent;
+      const currentCorrectAnswer = correctAnswers[activeImageIndex];
+
+      if (selectedChoice === currentCorrectAnswer) {
+        showResultMessage(true);
+        activeImageIndex++;
+
+        if (activeImageIndex >= images.length) {
+          window.location.href = 'part5.html';
+          return;
+        }
+
+        displayActiveImage();
+        displayChoices();
+      } else {
+        showResultMessage(false);
+      }
+    }
+
+    const choices = document.querySelectorAll('.choice');
+    choices.forEach((choice) => {
+      choice.addEventListener('click', checkAnswer);
+    });
 
     displayActiveImage();
     displayChoices();
-  } else {
-    showResultMessage(false);
-  }
-}
-
-const choices = document.querySelectorAll('.choice');
-choices.forEach((choice) => {
-  choice.addEventListener('click', checkAnswer);
-});
-
-displayActiveImage();
-displayChoices();
   </script>
 </body>
 </html>

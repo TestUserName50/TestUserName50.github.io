@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>Part 5</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -24,80 +24,94 @@
       <button class="choice">Choice 6</button>
     </div>
     <div class="result-message"></div>
+    <div class="score-message"></div>
   </div>
   
   <script>
     const images = ['image1.jpg', 'image2.jpg', 'image3.jpg', 'image4.jpg'];
-const correctAnswers = ['René Magritte', 'Gustav Klimt', 'Frida Kahlo', 'Marc Chagall', 'Henri Matisse', 'Wassily Kandinsky'];
+    const correctAnswers = ['René Magritte', 'Gustav Klimt', 'Frida Kahlo', 'Marc Chagall', 'Henri Matisse', 'Wassily Kandinsky'];
 
-let activeImageIndex = 0;
+    let activeImageIndex = 0;
+    let score = 0;
 
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
-function displayActiveImage() {
-  const images = document.querySelectorAll('.image');
-  images.forEach((image, index) => {
-    if (index === activeImageIndex) {
-      image.classList.add('active');
-    } else {
-      image.classList.remove('active');
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
     }
-  });
-}
 
-function displayChoices() {
-  const choices = document.querySelectorAll('.choice');
-  const shuffledAnswers = shuffle(correctAnswers.slice());
+    function displayActiveImage() {
+      const images = document.querySelectorAll('.image');
+      images.forEach((image, index) => {
+        if (index === activeImageIndex) {
+          image.classList.add('active');
+        } else {
+          image.classList.remove('active');
+        }
+      });
+    }
 
-  choices.forEach((choice, index) => {
-    choice.textContent = shuffledAnswers[index];
-  });
-}
+    function displayChoices() {
+      const choices = document.querySelectorAll('.choice');
+      const shuffledAnswers = shuffle(correctAnswers.slice());
 
-function showResultMessage(isCorrect) {
-  const resultMessage = document.querySelector('.result-message');
-  resultMessage.textContent = isCorrect ? 'Correct answer!' : 'Wrong answer! Try again.';
-  resultMessage.classList.add(isCorrect ? 'correct' : 'wrong');
-}
+      choices.forEach((choice, index) => {
+        choice.textContent = shuffledAnswers[index];
+      });
+    }
 
-function checkAnswer(event) {
-  const selectedChoice = event.target.textContent;
-  const currentCorrectAnswer = correctAnswers[activeImageIndex];
+    function showResultMessage(isCorrect) {
+      const resultMessage = document.querySelector('.result-message');
+      const scoreMessage = document.querySelector('.score-message');
 
-  if (selectedChoice === currentCorrectAnswer) {
-    showResultMessage(true);
-    activeImageIndex++;
+      if (isCorrect) {
+        resultMessage.textContent = 'Correct answer!';
+        resultMessage.classList.add('correct');
+        score++;
+      } else {
+        resultMessage.textContent = 'Wrong answer! Try again.';
+        resultMessage.classList.add('wrong');
+      }
 
-if (activeImageIndex >= images.length) {
-  const resultMessage = document.querySelector('.result-message');
-  resultMessage.textContent = 'Good Job! You Scored 20/20!';
+      scoreMessage.textContent = `Score: ${16 + score}/${20}`;
+    }
 
-  setTimeout(() => {
-    window.location.href = 'part1.html';
-  }, 3500);
-}
+    function checkAnswer(event) {
+      const selectedChoice = event.target.textContent;
+      const currentCorrectAnswer = correctAnswers[activeImageIndex];
 
+      if (selectedChoice === currentCorrectAnswer) {
+        showResultMessage(true);
+        activeImageIndex++;
+
+        if (activeImageIndex >= images.length) {
+          const resultMessage = document.querySelector('.result-message');
+          resultMessage.textContent = 'Good Job!';
+
+          const scoreMessage = document.querySelector('.score-message');
+          scoreMessage.textContent = `Final Score: ${20}/${20}`;
+
+          setTimeout(() => {
+            window.location.href = 'part1.html';
+          }, 5500);
+        }
+
+        displayActiveImage();
+        displayChoices();
+      } else {
+        showResultMessage(false);
+      }
+    }
+
+    const choices = document.querySelectorAll('.choice');
+    choices.forEach((choice) => {
+      choice.addEventListener('click', checkAnswer);
+    });
 
     displayActiveImage();
     displayChoices();
-  } else {
-    showResultMessage(false);
-  }
-}
-
-const choices = document.querySelectorAll('.choice');
-choices.forEach((choice) => {
-  choice.addEventListener('click', checkAnswer);
-});
-
-displayActiveImage();
-displayChoices();
   </script>
 </body>
 </html>
