@@ -1,68 +1,83 @@
-        .button-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
+.button-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
 
-        .start-button {
-     padding: 10px;
-      width: 400px;
-      border-radius: 20px;
-      font-size: 26px;
-        }
+.start-button {
+  padding: 10px;
+  width: 400px;
+  border-radius: 20px;
+  font-size: 26px;
+}
 
-    .container {
-      text-align: center;
-      margin-top: 20px;
-    }
+.container {
+  text-align: center;
+  margin-top: 20px;
+}
 
-    .row {
-      margin-bottom: 10px;
-    }
+.row {
+  margin-bottom: 10px;
+}
 
-    .image {
-      width: 200px;
-      height: 200px;
-      margin: 5px;
-      border: 2px solid black;
-    }
+.image {
+  width: 200px;
+  height: 200px;
+  margin: 5px;
+  border: 2px solid black;
+}
 
-    .active {
-      border-color: red;
-    }
+.active {
+  border-color: red;
+}
+
 .choices {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    .choice {
-      margin: 5px;
-    }
-    
-    button {
-      padding: 10px;
-      width: 400px;
-      border-radius: 20px;
-      font-size: 26px;
-    }
-    
-    button:hover {
-      background-color: #3E8DBA;
-      color: white;
-      transition-duration: 0.5s;
-    }
-        
-    .correct {
-      color: green;
-    }
+.choice {
+  margin: 5px;
+}
 
-    .wrong {
-      color: red;
-    }
+button {
+  padding: 10px;
+  width: 400px;
+  border-radius: 20px;
+  font-size: 26px;
+}
 
-    .result-message {
-      margin-top: 10px;
-    }
+button:hover {
+  background-color: #3E8DBA;
+  color: white;
+  transition-duration: 0.5s;
+}
+
+.correct {
+  color: green;
+}
+
+.wrong {
+  color: red;
+}
+
+.result-message {
+  margin-top: 10px;
+}
+
+@media (min-width: 600px) {
+  .row {
+    display: flex;
+    justify-content: center;
+  }
+
+  .image {
+    width: 200px;
+    height: 200px;
+    margin: 5px;
+    border: 2px solid black;
+  }
+}
