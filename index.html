@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title></title>
     <style>
@@ -27,14 +27,25 @@
         }
     </style>
 </head>
-
 <body>
+    <audio src="001.mpeg" autoplay></audio>
+
     <div class="button-container">
         <button class="start-button" onclick="openPart1()">START</button>
     </div>
+
     <script>
         function openPart1() {
             window.location.href = "part1.html";
+        }
+    </script>
+    <script>
+        function openmusic() {
+            fetch('music.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('content').innerHTML = data;
+                });
         }
     </script>
 </body>
