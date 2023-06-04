@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="styles.css">
 </head>
-<iframe width="0" height="0" src="https://www.youtube.com/embed/QMokMQ8Bu7Y?rel=0&autoplay=1" frameborder="0" allow="autoplay"></iframe>
+
+<iframe width="0" height="0" src="https://www.youtube.com/embed/QMokMQ8Bu7Y?rel=0&autoplay=1" frameborder="0" allow="autoplay">
+  
+</iframe>
 <body>
   <div class="container">
     <div class="row">
@@ -26,6 +29,10 @@
     </div>
     <div class="result-message"></div>
     <div class="score-message"></div>
+    <div class="home-button-container">
+      <button class="home-button" onclick="goBack()">Back to Home</button>
+    </div>
+    
   </div>
   
   <script>
@@ -110,7 +117,10 @@
     choices.forEach((choice) => {
       choice.addEventListener('click', checkAnswer);
     });
-
+    function goBack() {
+      window.location.href = 'index.html';
+    }
+    
     displayActiveImage();
     displayChoices();
   </script>
