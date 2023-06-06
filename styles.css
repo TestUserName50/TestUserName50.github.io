@@ -92,4 +92,30 @@ button:hover {
   .active {
     border-color: red;
   }
+  .home-button-container {
+  text-align: center;
+}
+
+.home-button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 20px;
+  font-size: 16px;
+  background-color: green;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 150px;
+}
+
+.home-button:last-child {
+  margin-right: 0;
+}
+
+.home-button:hover {
+  background-color: hotpink;
+  transition-duration: 0.5s;
+}
+
 }
